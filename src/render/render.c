@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 18:49:41 by suroh             #+#    #+#             */
+/*   Updated: 2025/05/17 18:51:37 by suroh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/functions.h"
 
 void	put_pixel(t_img *img, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
 
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
-		return;
+		return ;
 	dst = img->pixels + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
@@ -22,7 +34,7 @@ void	draw_ceil_floor(t_scene *scene)
 		if (y < WINDOW_HEIGHT / 2)
 			color = scene->floor;
 		else
-			color = scene->ceil; 
+			color = scene->ceil;
 		x = 0;
 		while (x < WINDOW_WIDTH)
 		{
@@ -38,7 +50,7 @@ void	draw_column(t_scene *scene, t_texture *tex, int draw_start,
 {
 	double			tex_pos;
 	int				tex_y;
-	unsigned int 	color;
+	unsigned int	color;
 
 	tex_pos = 0.0;
 	while (draw_start <= draw_end)

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_init.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 18:55:27 by suroh             #+#    #+#             */
+/*   Updated: 2025/05/17 19:05:49 by suroh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/functions.h"
 
-t_texture	*add_wall_pixels(t_draw *draw, char* file)
+t_texture	*add_wall_pixels(t_draw *draw, char *file)
 {
 	t_texture	*temp_tex;
 
@@ -8,18 +20,18 @@ t_texture	*add_wall_pixels(t_draw *draw, char* file)
 	temp_tex = (t_texture *)malloc(sizeof(t_texture));
 	if (!temp_tex)
 		return (NULL);
-	temp_tex->img_ptr = mlx_xpm_file_to_image (draw->mlx_connection , file, 
-                                               &temp_tex->width , &temp_tex->height) ;
+	temp_tex->img_ptr = mlx_xpm_file_to_image(draw->mlx_connection, file,
+			&temp_tex->width, &temp_tex->height);
 	if (!temp_tex->img_ptr)
 		return (free(temp_tex), NULL);
 	temp_tex->pixels = mlx_get_data_addr(temp_tex->img_ptr,
-							&temp_tex->bpp, &temp_tex->line_length, &temp_tex->endian);
+			&temp_tex->bpp, &temp_tex->line_length, &temp_tex->endian);
 	return (temp_tex);
 }
 
 t_textures	*load_textures(t_draw *draw, t_map *map)
 {
-	t_textures *texs;
+	t_textures	*texs;
 
 	texs = (t_textures *)malloc(sizeof(t_textures));
 	if (!texs)
@@ -45,28 +57,29 @@ t_textures	*load_textures(t_draw *draw, t_map *map)
 
 t_draw	*draw_init(void)
 {
-	t_draw *draw;
+	t_draw	*draw;
 
 	draw = NULL;
 	draw = (t_draw *)malloc(sizeof(t_draw));
 	if (!draw)
 		return (NULL);
 	draw->mlx_connection = mlx_init();
-	draw->mlx_window = mlx_new_window (draw->mlx_connection , WINDOW_WIDTH , WINDOW_HEIGHT , "cub3D");
+	draw->mlx_window = mlx_new_window(draw->mlx_connection,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	draw->img = NULL;
 	draw->img = (t_img *)malloc(sizeof(t_img));
 	if (!draw->img)
 		return (free(draw), NULL);
 	draw->img->img_ptr = mlx_new_image(draw->mlx_connection,
-							WINDOW_WIDTH, WINDOW_HEIGHT);
+			WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw->img->pixels = mlx_get_data_addr(draw->img->img_ptr, &draw->img->bpp,
-							&draw->img->line_length, &draw->img->endian);
+			&draw->img->line_length, &draw->img->endian);
 	return (draw);
 }
 
 t_scene	*render_init(t_cub_data *data, t_map *map)
 {
-	t_scene *scene;
+	t_scene	*scene;
 
 	scene = (t_scene *)malloc(sizeof(t_scene));
 	if (!scene)

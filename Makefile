@@ -1,39 +1,80 @@
-NAME = cub3D
+NAME        = cub3D
 
-SRC_DIR	= ./src
-SRCS = $(SRC_DIR)/main.c														\
-	$(SRC_DIR)/render/render.c	$(SRC_DIR)/render/render_init.c					\
-	$(SRC_DIR)/render/render_init_utils.c	$(SRC_DIR)/render/render_ray_utils.c\
-	$(SRC_DIR)/render/render_tex_utils.c
-INC_DIR	= ./inc
+# Library paths
+LIBFT_PATH  = libs/libft
+LIBFT_LIB   = $(LIBFT_PATH)/libft.a
+MLX_PATH    = libs/minilibx-linux
+MLX_LIB     = $(MLX_PATH)/libmlx.a
+GNL_PATH    = libs/get_next_line
+
+# Source files
+SRCS = \
+    src/main.c \
+    src/helper_tools.c \
+    src/parsing/parsing_utils_1.c \
+    src/parsing/parsing_utils_2.c \
+    src/parsing/finalize_grid.c \
+    src/parsing/validate_map.c \
+    src/render/render.c \
+    src/render/render_init.c \
+    src/render/render_init_utils.c \
+    src/render/render_ray_utils.c \
+    src/render/render_tex_utils.c \
+    $(GNL_PATH)/get_next_line.c \
+    $(GNL_PATH)/get_next_line_utils.c
+
 OBJS = $(SRCS:.c=.o)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -g -I$(INC_DIR) -I/usr/include -I$(MLX_PATH) -fsanitize=address,undefined
+# Compiler and flags
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -O3 -g \
+          -Iinc \
+          -I$(GNL_PATH) \
+          -I$(LIBFT_PATH) \
+          -I$(MLX_PATH)
+LDFLAGS = -L$(MLX_PATH) -lmlx \
+          -L$(LIBFT_PATH) -lft \
+          -lX11 -lXext -lm
 
-MLX_PATH = libs/minilibx-linux
-MLX_LIB = $(MLX_PATH)/libmlx.a
+# ---------------------------------------------------------------------------- #
+#                                  RULES                                       #
+# ---------------------------------------------------------------------------- #
 
-all: $(NAME)
+all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)
 
+# Build libft silently, only the archive (no tests)
+$(LIBFT_LIB):
+	@$(MAKE) -s --no-print-directory -C $(LIBFT_PATH) libft.a
+
+# Build MiniLibX (only the static lib, no tests)
 $(MLX_LIB):
-	$(MAKE) -C $(MLX_PATH)
+	@cd $(MLX_PATH) && ./configure > /dev/null 2>&1 || true
+	@cd $(MLX_PATH) && \
+	  $(MAKE) -s --no-print-directory -f makefile.gen libmlx.a > /dev/null 2>&1 || true
 
-$(NAME): $(OBJS) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(MLX_PATH) -lmlx -lX11 -lXext -lm
 
+
+# Link final executable
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
+
+# Compile each .c to .o
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(MLX_PATH) clean
+	@rm -f $(OBJS)
+	@rm -rf $(MLX_PATH)/obj \
+	        $(MLX_PATH)/libmlx.a \
+	        $(MLX_PATH)/libmlx_Linux.a
+
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(MLX_PATH) clean
+	@rm -f $(NAME) $(LIBFT_LIB)
+	@$(MAKE) -s --no-print-directory -C $(LIBFT_PATH) fclean
 
+
+# Rebuild everything
 re: fclean all
 
 .PHONY: all clean fclean re
-

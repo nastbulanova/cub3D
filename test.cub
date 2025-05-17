@@ -1,0 +1,14 @@
+R 640 480
+NO ./files/colorstone.xpm
+SO ./files/bluestone.xpm
+WE ./files/greystone.xpm
+EA ./files/purplestone.xpm
+F 220,100,0
+C 225,30,0
+
+1111111111
+1000000001
+1000N00001
+1110001111
+1000000001
+1111111111

@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_tex_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 19:09:55 by suroh             #+#    #+#             */
+/*   Updated: 2025/05/17 19:10:36 by suroh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/functions.h"
 
 unsigned int	get_tex_pixel(t_texture *tex, int x, int y)
 {
-	char *dst;
+	char	*dst;
 
 	dst = tex->pixels + (y * tex->line_length + x * (tex->bpp / 8));
 	return (*(unsigned int *)dst);
 }
 
-void	calculate_projection(double perp_dist, int *line_height, int *draw_start, int *draw_end)
+void	calculate_projection(double perp_dist,
+			int *line_height, int *draw_start, int *draw_end)
 {
 	double	line_h_dbl;
 	int		local_line_height;
 
 	line_h_dbl = (double)WINDOW_HEIGHT / perp_dist;
 	local_line_height = (int)line_h_dbl;
-
 	*line_height = local_line_height;
 	*draw_start = -local_line_height / 2 + WINDOW_HEIGHT / 2;
 	if (*draw_start < 0)
@@ -50,7 +62,7 @@ t_texture	*choose_texture(t_scene *scene, t_ray *ray)
 }
 
 int	calculate_tex_x(t_scene *scene, double perp_dist, t_ray *ray,
-				   t_texture *tex)
+						t_texture *tex)
 {
 	int		tex_x;
 	double	wall_x;

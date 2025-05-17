@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 18:31:11 by suroh             #+#    #+#             */
+/*   Updated: 2025/05/17 18:32:10 by suroh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
-#define STRUCTS_H
+# define STRUCTS_H
 
 # include "defines.h"
 
 typedef struct s_map
 {
-	char*	file_no;
-	char*	file_so;
-	char*	file_we;
-	char*	file_ea;
-	char*	floor;
-	char*	ceil;
-	char**	map;
+	char	*file_no;
+	char	*file_so;
+	char	*file_we;
+	char	*file_ea;
+	char	*floor;
+	char	*ceil;
+	char	**map;
 	int		cols;
 	int		rows;
 }			t_map;
