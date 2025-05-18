@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:31:11 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 18:32:10 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 18:51:31 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_map
 	char	**map;
 	int		cols;
 	int		rows;
+	int		res_w;
+	int		res_h;
 }			t_map;
 
 typedef struct s_player
@@ -34,6 +36,8 @@ typedef struct s_player
 	double	d_y;
 	double	pos_x;
 	double	pos_y;
+	double	plane_x;
+	double	plane_y;
 }				t_player;
 
 typedef struct s_rgb

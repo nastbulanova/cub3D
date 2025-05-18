@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:55:27 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 19:05:49 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 19:35:13 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,43 +37,43 @@ t_textures	*load_textures(t_draw *draw, t_map *map)
 	if (!texs)
 		return (NULL);
 	texs->north = NULL;
+	texs->south = NULL;
+	texs->east = NULL;
+	texs->west = NULL;
 	texs->north = add_wall_pixels(draw, map->file_no);
 	if (!texs->north)
 		return (free(texs), NULL);
-	texs->south = NULL;
 	texs->south = add_wall_pixels(draw, map->file_so);
 	if (!texs->south)
-		return (NULL);//add free
-	texs->east = NULL;
+		return (free_textures(texs), NULL);
 	texs->east = add_wall_pixels(draw, map->file_ea);
 	if (!texs->east)
-		return (NULL);//add free
-	texs->west = NULL;
+		return (free_textures(texs), NULL);
 	texs->west = add_wall_pixels(draw, map->file_we);
 	if (!texs->west)
-		return (NULL);//add free
+		return (free_textures(texs), NULL);
 	return (texs);
 }
 
-t_draw	*draw_init(void)
+t_draw	*draw_init(t_map *map)
 {
 	t_draw	*draw;
+	int		width;
+	int		height;
 
+	set_dimensions(map, &width, &height);
 	draw = NULL;
 	draw = (t_draw *)malloc(sizeof(t_draw));
 	if (!draw)
 		return (NULL);
 	draw->mlx_connection = mlx_init();
-	draw->mlx_window = mlx_new_window(draw->mlx_connection,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
-	draw->img = NULL;
-	draw->img = (t_img *)malloc(sizeof(t_img));
-	if (!draw->img)
-		return (free(draw), NULL);
-	draw->img->img_ptr = mlx_new_image(draw->mlx_connection,
-			WINDOW_WIDTH, WINDOW_HEIGHT);
-	draw->img->pixels = mlx_get_data_addr(draw->img->img_ptr, &draw->img->bpp,
-			&draw->img->line_length, &draw->img->endian);
+	draw->mlx_window = mlx_new_window
+		(draw->mlx_connection, width, height, "cub3D");
+	if (!init_image(draw, width, height))
+	{
+		free(draw);
+		return (NULL);
+	}
 	return (draw);
 }
 
@@ -81,22 +81,13 @@ t_scene	*render_init(t_cub_data *data, t_map *map)
 {
 	t_scene	*scene;
 
-	scene = (t_scene *)malloc(sizeof(t_scene));
+	scene = init_scene_basics(data, map);
 	if (!scene)
 		return (NULL);
-	scene->draw = NULL;
-	scene->draw = draw_init();
-	if (!scene->draw)
-		return (free(scene), NULL);
-	scene->player = NULL;
-	scene->cols = data->cols;
-	scene->rows = data->rows;
-	scene->fov_scale = get_fov_scale();
-	scene->floor = rgb_to_color(&(data->floor));
-	scene->ceil = rgb_to_color(&(data->ceil));
-	scene->texs = NULL;
-	scene->texs = load_textures(scene->draw, map);
-	if (!scene->texs)
-		return (NULL);// add free(scene and draw)
+	if (!setup_draw_and_textures(scene, map))
+	{
+		free(scene);
+		return (NULL);
+	}
 	return (scene);
 }

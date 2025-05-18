@@ -13,11 +13,16 @@ SRCS = \
     src/helper_tools.c \
     src/parsing/parsing_utils_1.c \
     src/parsing/parsing_utils_2.c \
+	src/parsing/parsing_utils_3.c \
     src/parsing/finalize_grid.c \
     src/parsing/validate_map.c \
+	src/player/player_init.c \
+	src/data/data_init.c \
+	src/data/data_parsing_color.c \
     src/render/render.c \
     src/render/render_init.c \
-    src/render/render_init_utils.c \
+    src/render/render_init_utils_1.c \
+	src/render/render_init_utils_2.c \
     src/render/render_ray_utils.c \
     src/render/render_tex_utils.c \
     $(GNL_PATH)/get_next_line.c \

@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 22:42:03 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 19:44:02 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,50 +39,6 @@ t_map	*parse_map(char *file_path)
 	map->rows = rows;
 	validate_map(map);
 	return (map);
-}
-
-t_player	*player_init(void)
-{
-	t_player	*player;
-
-	player = (t_player *)malloc(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	//should be parsed
-	player->pos_x = 1.5;
-	player->pos_y = 1.5;
-	player->d_x = 1;
-	player->d_y = 0;
-	return (player);
-}
-
-t_cub_data	*data_init(t_map *map)
-{
-	t_cub_data	*data;
-
-	data = NULL;
-	data = (t_cub_data *)malloc(sizeof(t_cub_data));
-	if (!data)
-		return (NULL);
-	data->player = NULL;
-	data->player = player_init();
-	if (!data->player)
-		return (NULL); //need to free data
-	data->map = map->map;
-	data->cols = map->cols;
-	data->rows = map->rows;
-	//should be parsed
-	data->floor.red = 220;
-	data->floor.green = 100;
-	data->floor.blue = 0;
-	data->ceil.red = 225;
-	data->ceil.green = 30;
-	data->ceil.blue = 0;
-	data->scene = NULL;
-	data->scene = render_init(data, map);
-	if (!data->scene)
-		return (NULL); //need to free data
-	return (data);
 }
 
 int	main(int argc, char **argv)

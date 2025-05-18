@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:43:30 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 22:49:40 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 19:21:42 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,24 @@ char	**realloc_list(char **list, int new_count)
 	}
 	free(list);
 	return (new_list);
+}
+
+void	cleanup_partial_data(t_cub_data *data)
+{
+	if (data->player)
+		free(data->player);
+	free(data);
+}
+
+void	free_textures(t_textures *texs)
+{
+	if (texs->north)
+		free(texs->north);
+	if (texs->south)
+		free(texs->south);
+	if (texs->east)
+		free(texs->east);
+	if (texs->west)
+		free(texs->west);
+	free(texs);
 }
