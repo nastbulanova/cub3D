@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:35:15 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 23:25:22 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/19 22:07:22 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_map	*init_map_struct(void)
 	map = malloc(sizeof(*map));
 	if (!map)
 		exit_error("malloc failed");
+	ft_memset(map, 0, sizeof(*map));
 	map->cols = 0;
 	map->rows = 0;
 	map->map = NULL;

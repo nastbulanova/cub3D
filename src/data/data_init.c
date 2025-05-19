@@ -6,11 +6,12 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:56:07 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 19:44:43 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/19 22:05:55 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/functions.h"
+#include "../../libs/libft/libft.h"
 
 static t_cub_data	*allocate_data(void)
 {
@@ -19,8 +20,11 @@ static t_cub_data	*allocate_data(void)
 	data = (t_cub_data *)malloc(sizeof(t_cub_data));
 	if (!data)
 		return (NULL);
+	ft_memset(data, 0, sizeof(t_cub_data));
 	data->player = NULL;
 	data->scene = NULL;
+	data->mlx = NULL;
+	data->win = NULL;
 	return (data);
 }
 

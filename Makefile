@@ -18,7 +18,9 @@ SRCS = \
     src/parsing/validate_map.c \
 	src/player/player_init.c \
 	src/player/player_movement.c \
+	src/hooks/exit_game_helpers.c \
 	src/hooks/key_handler.c \
+	src/hooks/key_press_helpers.c \
 	src/data/data_init.c \
 	src/data/data_parsing_color.c \
     src/render/render.c \

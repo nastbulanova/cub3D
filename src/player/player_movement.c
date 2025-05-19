@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:32:28 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 22:53:20 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/19 22:06:27 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,49 +24,6 @@ void	move_forward_backward(t_cub_data *data, t_player *player, double speed)
 	if (data->map[(int)new_y][(int)player->pos_x] != '1')
 		player->pos_y = new_y;
 }
-
-/*void move_forward_backward(t_cub_data *data, t_player *player, double speed)
-{
-    double new_x;
-    double new_y;
-
-    printf("MOVE FB: Current pos=(%f,%f) dir=(%f,%f) speed=%f\n", 
-        player->pos_x, player->pos_y, player->d_x, player->d_y, speed);
-
-    new_x = player->pos_x + player->d_x * speed;
-    new_y = player->pos_y + player->d_y * speed;
-    
-    printf("MOVE FB: Attempting to move to (%f,%f)\n", new_x, new_y);
-    
-    // Check X collision
-    if (data->map[(int)player->pos_y][(int)new_x] != '1')
-    {
-        player->pos_x = new_x;
-        printf("MOVE FB: X move allowed\n");
-    }
-    else
-    {
-        printf("MOVE FB: X collision detected at map[%d][%d] = '%c'\n", 
-            (int)player->pos_y, (int)new_x,
-			data->map[(int)player->pos_y][(int)new_x]);
-    }
-    
-    // Check Y collision
-    if (data->map[(int)new_y][(int)player->pos_x] != '1')
-    {
-        player->pos_y = new_y;
-        printf("MOVE FB: Y move allowed\n");
-    }
-    else
-    {
-        printf("MOVE FB: Y collision detected at map[%d][%d] = '%c'\n", 
-            (int)new_y, (int)player->pos_x,
-			data->map[(int)new_y][(int)player->pos_x]);
-    }
-    
-    printf("MOVE FB: Final position = (%f,%f)\n", player->pos_x, player->pos_y);
-}
-*/
 
 void	move_left_right(t_cub_data *data, t_player *player, double speed)
 {
