@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:54:08 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 21:02:16 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 22:55:25 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
-#endif
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>

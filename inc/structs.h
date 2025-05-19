@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:31:11 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 18:51:31 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:05:55 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_rgb
 
 typedef struct s_cub_data
 {
+	void			*mlx;
+	void			*win;
 	t_rgb			floor;
 	t_rgb			ceil;
 	char			**map;
@@ -108,6 +110,18 @@ typedef struct s_scene
 	int			ceil;
 }				t_scene;
 
+typedef struct s_map_pos
+{
+	int		x;
+	int		y;
+}				t_map_pos;
+
+typedef struct s_projection
+{
+	double	perp_dist;
+	int		line_height;
+}				t_projection;
+
 typedef struct s_ray
 {
 	double	camera_x;
@@ -120,6 +134,11 @@ typedef struct s_ray
 	double	side_dist_x;
 	double	side_dist_y;
 	int		side;
+	int		draw_start;
+	int		draw_end;
+	int		tex_x;
+	double	tex_step;
+	int		screen_x;
 }				t_ray;
 
 #endif

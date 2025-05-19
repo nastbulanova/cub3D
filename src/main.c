@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 19:44:02 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/19 18:22:46 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ t_map	*parse_map(char *file_path)
 	map = init_map_struct();
 	grid = NULL;
 	rows = 0;
-	read_map_lines(fd, map, &grid, &rows);
+	read_map_lines(fd, map);
 	close(fd);
+	grid = map->map;
+	rows = map->rows;
 	map->map = finalize_grid(grid, rows, &map->cols);
 	map->rows = rows;
 	validate_map(map);
@@ -49,13 +51,15 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_error("Usage: ./cub3D <map.cub>");
 	map = parse_map(argv[1]);
-	data = data_init(map);
+    data = data_init(map);
 	render_scene(data, data->scene);
 	mlx_put_image_to_window(data->scene->draw->mlx_connection,
 		data->scene->draw->mlx_window, data->scene->draw->img->img_ptr,
 		0, 0);
 	mlx_hook(data->scene->draw->mlx_window,
-		KeyPress, KeyPressMask, handle_keypress, NULL);
+		KeyPress, KeyPressMask, key_press, data);
+	mlx_hook(data->scene->draw->mlx_window,
+		33, 1L << 17, close_window, data);
 	mlx_loop(data->scene->draw->mlx_connection);
 	return (0);
 }

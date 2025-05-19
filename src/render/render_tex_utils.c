@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:09:55 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 19:10:36 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 22:57:08 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	calculate_projection(double perp_dist,
 	*line_height = local_line_height;
 	*draw_start = -local_line_height / 2 + WINDOW_HEIGHT / 2;
 	if (*draw_start < 0)
-	{
-		//tex_pos += (double)(-draw_start) * step;/////
 		*draw_start = 0;
-	}
 	*draw_end = local_line_height / 2 + WINDOW_HEIGHT / 2;
 	if (*draw_end >= WINDOW_HEIGHT)
 		*draw_end = WINDOW_HEIGHT - 1;

@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:05:56 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 19:38:10 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 22:51:54 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	set_dimensions(t_map *map, int *width, int *height)
 {
-	*width = WINDOW_WIDTH;
-	*height = WINDOW_HEIGHT;
-	if (map && map->res_w > 0)
+	if (width != NULL)
+		*width = WINDOW_WIDTH;
+	if (height != NULL)
+		*height = WINDOW_HEIGHT;
+	if (map != NULL && width != NULL && map->res_w > 0)
 		*width = map->res_w;
-	if (map && map->res_h > 0)
+	if (map != NULL && height != NULL && map->res_h > 0)
 		*height = map->res_h;
 }
 

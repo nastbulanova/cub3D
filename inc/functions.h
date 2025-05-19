@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:32:25 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 19:50:29 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:25:01 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 //render
 void			put_pixel(t_img *img, int x, int y, int color);
 void			draw_ceil_floor(t_scene *scene);
-void			draw_column(t_scene *scene, t_texture *tex, int draw_start,
-					int draw_end, int tex_x, double step, int x);
+void			draw_column(t_scene *scene, t_texture *tex, t_ray *ray);
 void			render_column(t_cub_data *data, t_scene *scene, int x);
 void			render_scene(t_cub_data *data, t_scene *scene);
 
@@ -59,6 +58,15 @@ t_scene			*init_scene_basics(t_cub_data *data, t_map *map);
 void			set_player_directions(t_player *player, char direction);
 char			find_player_position(t_map *map, int *x_pos, int *y_pos);
 t_player		*player_init(t_map *map);
+void			move_forward_backward(t_cub_data *data,
+					t_player *player, double speed);
+void			move_left_right(t_cub_data *data,
+					t_player *player, double speed);
+void			rotate_player(t_player *player, double angle);
+
+//key_hooks
+int				key_press(int keycode, t_cub_data *data);
+int				close_window(t_cub_data *data);
 
 //data
 t_cub_data		*data_init(t_map *map);
@@ -69,12 +77,12 @@ t_map			*init_map_struct(void);
 bool			is_texture_line(char *line);
 bool			is_map_line(char *line);
 bool			is_blank_line(char *line);
-void			strip_line(char *line);
+char			*strip_line(const char *line);
 void			parse_texture_line(t_map *map, char *line);
 void			parse_color_line(char **target, char *line);
 void			add_map_line(t_map *map, char *line, char ***grid, int *rows);
 void			process_line(t_map *map, char *line, char ***grid, int *rows);
-void			read_map_lines(int fd, t_map *map, char ***grid, int *rows);
+void			read_map_lines(int fd, t_map *map);
 void			parse_resolution_line(t_map *map, char *line);
 
 //finalize_grid

@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 10:30:37 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 10:52:24 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 22:53:37 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,3 @@ void	parse_texture_line(t_map *map, char *line)
 	else
 		exit_error("Unknown texture identifier");
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:11:42 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 12:35:41 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/19 18:21:57 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	parse_color_line(char **target, char *line)
 
 void	add_map_line(t_map *map, char *line, char ***grid, int *rows)
 {
-	(void)*map;
 	char	**tmp;
 
+	(void)*map;
 	tmp = realloc_list(*grid, *rows + 1);
 	if (!tmp)
 		exit_error("Memory error");
@@ -41,7 +41,7 @@ void	add_map_line(t_map *map, char *line, char ***grid, int *rows)
 }
 
 void	process_line(t_map *map, char *line, char ***grid, int *rows)
-{   
+{
 	if (is_blank_line(line))
 		return ;
 	if (line[0] == 'R')
@@ -61,14 +61,26 @@ void	process_line(t_map *map, char *line, char ***grid, int *rows)
 	}
 }
 
-void	read_map_lines(int fd, t_map *map, char ***grid, int *rows)
+void	read_map_lines(int fd, t_map *map)
 {
 	char	*line;
+	char	*stripped_line;
+	char	**grid;
+	int		rows;
 
-	while ((line = get_next_line(fd)))
+	grid = NULL;
+	rows = 0;
+	while (1)
 	{
-		strip_line(line);
-		process_line(map, line, grid, rows);
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		stripped_line = strip_line(line);
 		free(line);
+		if (!is_blank_line(stripped_line))
+			process_line(map, stripped_line, &grid, &rows);
+		free(stripped_line);
 	}
+	map->map = grid;
+	map->rows = rows;
 }

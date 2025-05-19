@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:49:41 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 18:51:37 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:09:11 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,46 +45,46 @@ void	draw_ceil_floor(t_scene *scene)
 	}
 }
 
-void	draw_column(t_scene *scene, t_texture *tex, int draw_start,
-					int draw_end, int tex_x, double step, int x)
+void	draw_column(t_scene *scene, t_texture *tex, t_ray *ray)
 {
 	double			tex_pos;
 	int				tex_y;
 	unsigned int	color;
 
 	tex_pos = 0.0;
-	while (draw_start <= draw_end)
+	while (ray->draw_start <= ray->draw_end)
 	{
 		tex_y = ((int)tex_pos) & (tex->height - 1);
-		tex_pos += step;
-		color = get_tex_pixel(tex, tex_x, tex_y);
-		put_pixel(scene->draw->img, x, draw_start, color);
-		draw_start++;
+		tex_pos += ray->tex_step;
+		color = get_tex_pixel(tex, ray->tex_x, tex_y);
+		put_pixel(scene->draw->img, ray->screen_x, ray->draw_start, color);
+		ray->draw_start++;
 	}
 }
 
 void	render_column(t_cub_data *data, t_scene *scene, int x)
 {
-	t_ray		ray;
-	int			map_x;
-	int			map_y;
-	double		perp_dist;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	t_texture	*tex;
-	int			tex_x;
-	double		step;
+	t_ray			ray;
+	t_map_pos		map_pos;
+	t_projection	proj;
+	t_texture		*tex;
 
+	ray.screen_x = x;
 	calculate_ray(scene, x, &ray);
-	init_ray_steps(scene, &ray, &map_x, &map_y);
-	perform_dda(data, &ray, &map_x, &map_y);
-	perp_dist = calculate_wall_distance(scene, &ray, map_x, map_y);
-	calculate_projection(perp_dist, &line_height, &draw_start, &draw_end);
+	init_ray_steps(scene, &ray, &map_pos.x, &map_pos.y);
+	perform_dda(data, &ray, &map_pos.x, &map_pos.y);
+	proj.perp_dist = calculate_wall_distance(scene, &ray, map_pos.x, map_pos.y);
+	proj.line_height = (int)(WINDOW_HEIGHT / proj.perp_dist);
+	ray.draw_start = -proj.line_height / 2 + WINDOW_HEIGHT / 2;
+	if (ray.draw_start < 0)
+		ray.draw_start = 0;
+	ray.draw_end = proj.line_height / 2 + WINDOW_HEIGHT / 2;
+	if (ray.draw_end >= WINDOW_HEIGHT)
+		ray.draw_end = WINDOW_HEIGHT - 1;
 	tex = choose_texture(scene, &ray);
-	tex_x = calculate_tex_x(scene, perp_dist, &ray, tex);
-	step = 1.0 * tex->height / (double)line_height;
-	draw_column(scene, tex, draw_start, draw_end, tex_x, step, x);
+	ray.tex_x = calculate_tex_x(scene, proj.perp_dist, &ray, tex);
+	ray.tex_step = 1.0 * tex->height / (double)proj.line_height;
+	draw_column(scene, tex, &ray);
 }
 
 void	render_scene(t_cub_data *data, t_scene *scene)

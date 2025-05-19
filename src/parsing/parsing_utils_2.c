@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:35:15 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 12:32:03 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:25:22 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,26 @@ bool	is_blank_line(char *line)
 	return (line[i] == '\0');
 }
 
-void	strip_line(char *line)
+char	*strip_line(const char *line)
 {
-	int	len;
-	int	i;
+	char	*stripped;
+	int		len;
+	int		i;
 
-	if ((unsigned char)line[0] == 0xEF && (unsigned char)line[1] == 0xBB
-		&& (unsigned char)line[2] == 0xBF)
-	{
-		i = 0;
-		while (line[i + 3])
-		{
-			line[i] = line[i + 3];
-			i++;
-		}
-		line[i] = '\0';
-	}
+	if (!line)
+		return (NULL);
 	len = ft_strlen(line);
-	while (len > 0 && (line[len - 1] == ' ' || line[len - 1] == '\t'
-			|| line[len - 1] == '\r' || line[len - 1] == '\n'))
-		line[--len] = '\0';
+	if (len > 0 && line[len - 1] == '\n')
+		len--;
+	stripped = (char *)malloc(len + 1);
+	if (!stripped)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		stripped[i] = line[i];
+		i++;
+	}
+	stripped[len] = '\0';
+	return (stripped);
 }

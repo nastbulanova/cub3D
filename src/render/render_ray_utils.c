@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:06:37 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 19:09:45 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:13:07 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ void	calculate_ray(t_scene *scene, int x, t_ray *ray)
 	ray->delta_dist_y = fabs(1.0 / ray->ray_dir_y);
 }
 
-void	init_ray_steps(t_scene *scene, t_ray *ray, int *map_x, int *map_y)
+static void	init_map_position(t_scene *scene, int *map_x, int *map_y)
 {
 	*map_x = (int)scene->player->pos_x;
 	*map_y = (int)scene->player->pos_y;
+}
+
+void	init_ray_steps(t_scene *scene, t_ray *ray, int *map_x, int *map_y)
+{
+	init_map_position(scene, map_x, map_y);
 	if (ray->ray_dir_x < 0.0)
 	{
 		ray->step_x = -1;

@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:43:27 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 21:16:46 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/18 22:48:44 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,12 @@
 # define WINDOW_HEIGHT 480
 # define FOV 60
 # define PI_CONST 3.14159265358979323846
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65363
+# define KEY_RIGHT 65361
 
 #endif
