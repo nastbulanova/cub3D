@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:12:43 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 22:18:40 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/20 13:51:39 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,23 @@ void	free_map_data(t_map *map)
 	free(map);
 }
 
+static void	free_single_texture(void *mlx, t_texture *tex)
+{
+	if (!tex)
+		return ;
+	if (mlx && tex->img_ptr)
+		mlx_destroy_image(mlx, tex->img_ptr);
+	free(tex);
+}
+
 void	free_textures(void *mlx, t_textures *textures)
 {
 	if (!textures)
 		return ;
-	if (mlx && textures->north && textures->north->img_ptr)
-		mlx_destroy_image(mlx, textures->north->img_ptr);
-	if (mlx && textures->south && textures->south->img_ptr)
-		mlx_destroy_image(mlx, textures->south->img_ptr);
-	if (mlx && textures->east && textures->east->img_ptr)
-		mlx_destroy_image(mlx, textures->east->img_ptr);
-	if (mlx && textures->west && textures->west->img_ptr)
-		mlx_destroy_image(mlx, textures->west->img_ptr);
-	free(textures->north);
-	free(textures->south);
-	free(textures->east);
-	free(textures->west);
+	free_single_texture(mlx, textures->north);
+	free_single_texture(mlx, textures->south);
+	free_single_texture(mlx, textures->east);
+	free_single_texture(mlx, textures->west);
 	free(textures);
 }
 
@@ -60,9 +61,12 @@ void	free_drawing_resources(void *mlx, t_draw *draw)
 {
 	if (!draw)
 		return ;
-	if (mlx && draw->img && draw->img->img_ptr)
-		mlx_destroy_image(mlx, draw->img->img_ptr);
-	free(draw->img);
+	if (draw->img)
+	{
+		if (mlx && draw->img && draw->img->img_ptr)
+			mlx_destroy_image(mlx, draw->img->img_ptr);
+		free(draw->img);
+	}
 	free(draw);
 }
 
