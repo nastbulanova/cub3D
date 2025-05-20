@@ -51,7 +51,7 @@ void	draw_column(t_scene *scene, t_texture *tex, t_ray *ray)
 	int				tex_y;
 	unsigned int	color;
 
-	tex_pos = 0.0;
+	tex_pos = ray->tex_pos;
 	while (ray->draw_start <= ray->draw_end)
 	{
 		tex_y = ((int)tex_pos) & (tex->height - 1);
@@ -84,6 +84,7 @@ void	render_column(t_cub_data *data, t_scene *scene, int x)
 	tex = choose_texture(scene, &ray);
 	ray.tex_x = calculate_tex_x(scene, proj.perp_dist, &ray, tex);
 	ray.tex_step = 1.0 * tex->height / (double)proj.line_height;
+	ray.tex_pos = (ray.draw_start - WINDOW_HEIGHT / 2 + proj.line_height / 2) * ray.tex_step;
 	draw_column(scene, tex, &ray);
 }
 

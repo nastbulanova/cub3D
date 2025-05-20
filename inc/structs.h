@@ -139,6 +139,8 @@ typedef struct s_ray
 	int		tex_x;
 	double	tex_step;
 	int		screen_x;
+	double	tex_pos;
+
 }				t_ray;
 
 #endif
