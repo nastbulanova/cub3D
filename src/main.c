@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 18:22:46 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/20 11:52:20 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		exit_error("Usage: ./cub3D <map.cub>");
 	map = parse_map(argv[1]);
-    data = data_init(map);
+	data = data_init(map);
 	render_scene(data, data->scene);
 	mlx_put_image_to_window(data->scene->draw->mlx_connection,
 		data->scene->draw->mlx_window, data->scene->draw->img->img_ptr,
