@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:55:27 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 19:35:13 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/20 11:02:28 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ t_textures	*load_textures(t_draw *draw, t_map *map)
 		return (free(texs), NULL);
 	texs->south = add_wall_pixels(draw, map->file_so);
 	if (!texs->south)
-		return (free_textures(texs), NULL);
+		return (free_textures(draw->mlx_connection, texs), NULL);
 	texs->east = add_wall_pixels(draw, map->file_ea);
 	if (!texs->east)
-		return (free_textures(texs), NULL);
+		return (free_textures(draw->mlx_connection, texs), NULL);
 	texs->west = add_wall_pixels(draw, map->file_we);
 	if (!texs->west)
-		return (free_textures(texs), NULL);
+		return (free_textures(draw->mlx_connection, texs), NULL);
 	return (texs);
 }
 
