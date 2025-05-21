@@ -6,7 +6,7 @@ This document is written with the purpose of explaining the all in all logic of 
 
 A MiniLibX‑based ray‑casting engine in C, inspired by Wolfenstein 3D.
 
-![Ray‑casting Diagram](raycasting_diagram.png)
+![Ray‑casting Diagram](files/raycasting_diagram.png)
 
 ## Table of Contents
 
