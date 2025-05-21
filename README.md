@@ -8,37 +8,6 @@ A MiniLibX‑based ray‑casting engine in C, inspired by Wolfenstein 3D.
 
 ![Ray‑casting Diagram](files/subject_description/raycasting_diagram.png)
 
-## Project Structure
-
-```text
-cub3D/
-├── inc/
-│   ├── defines.h
-│   ├── functions.h
-│   └── structs.h
-├── src/
-│   ├── main.c
-│   ├── parse_map.c         # (not shown)
-│   ├── helper_tools.c
-│   ├── render.c
-│   ├── render_init.c
-│   ├── render_init_utils_1.c
-│   ├── render_init_utils_2.c
-│   ├── render_ray_utils.c
-│   └── render_tex_utils.c
-├── maps/
-│   └── sample.cub
-├── textures/
-│   ├── north.xpm
-│   ├── south.xpm
-│   ├── east.xpm
-│   └── west.xpm
-├── raycasting_diagram.png
-├── Makefile
-└── README.md
-```
-
-
 ## Table of Contents
 
 * [Big‑Picture Logic](#big‑picture-logic)
