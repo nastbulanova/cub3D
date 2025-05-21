@@ -37,9 +37,6 @@ A MiniLibX‑based ray‑casting engine in C, inspired by Wolfenstein 3D.
 5. **Draw Floor & Ceiling**
    Fill pixels above the wall slice with the ceiling color and below with the floor color.
 
-> **Diagram:**
-> ![Ray‑casting Diagram](raycasting_diagram.png)
-
 ---
 
 ## Project Objective
