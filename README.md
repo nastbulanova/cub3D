@@ -1,7 +1,17 @@
 
 # Detailed Code Explanation
 
-## 1. Big Logic
+## 1. Big Logic && Summary
+
+#1 parse_map → build a t_map full of resolution, textures, colors, grid
+
+#2 data_init → build a t_cub_data (player, textures loaded, window/image created)
+
+#3 render_scene + mlx_put_image_to_window → first draw
+
+#4 mlx_hook → install key (and expose) callbacks
+
+#5 mlx_loop → sit in the MLX loop, reacting to keys by updating your player and re-rendering
 
 ### `int main`
 
