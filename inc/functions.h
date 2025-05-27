@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:32:25 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 22:15:45 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/27 14:40:13 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ void			free_textures(void *mlx, t_textures *textures);
 void			free_drawing_resources(void *mlx, t_draw *draw);
 void			free_scene(void *mlx, t_scene *scene);
 int				key_press(int keycode, t_cub_data *data);
+int				key_release(int keycode, t_cub_data *data);
 int				close_window(t_cub_data *data);
 void			handle_movement_keys(int keycode, t_cub_data *data,
 					double move_speed);
 void			handle_rotation_keys(int keycode, t_cub_data *data,
 					double rot_speed);
 void			update_display(t_cub_data *data);
+int				loop_hook(t_cub_data *data);
 
 //data
 t_cub_data		*data_init(t_map *map);

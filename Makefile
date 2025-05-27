@@ -21,6 +21,7 @@ SRCS = \
 	src/hooks/exit_game_helpers.c \
 	src/hooks/key_handler.c \
 	src/hooks/key_press_helpers.c \
+	src/hooks/loop_hook.c \
 	src/data/data_init.c \
 	src/data/data_parsing_color.c \
     src/render/render.c \

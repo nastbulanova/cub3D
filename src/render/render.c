@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:49:41 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 23:09:11 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/27 14:58:36 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	render_column(t_cub_data *data, t_scene *scene, int x)
 	tex = choose_texture(scene, &ray);
 	ray.tex_x = calculate_tex_x(scene, proj.perp_dist, &ray, tex);
 	ray.tex_step = 1.0 * tex->height / (double)proj.line_height;
-	ray.tex_pos = (ray.draw_start - WINDOW_HEIGHT / 2 + proj.line_height / 2) * ray.tex_step;
+	ray.tex_pos = (ray.draw_start - WINDOW_HEIGHT / 2 + proj.line_height / 2)
+		* ray.tex_step;
 	draw_column(scene, tex, &ray);
 }
 

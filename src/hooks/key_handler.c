@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:40:03 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 22:12:10 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/27 14:56:02 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,39 @@ int	exit_game(t_cub_data *data)
 	return (0);
 }
 
-static int	validate_data(t_cub_data *data)
-{
-	if (!data)
-	{
-		printf("ERROR: data is NULL\n");
-		return (0);
-	}
-	if (!data->scene)
-	{
-		printf("ERROR: data->scene is NULL\n");
-		return (0);
-	}
-	if (!data->scene->player)
-	{
-		printf("ERROR: data->scene->player is NULL\n");
-		return (0);
-	}
-	return (1);
-}
-
 int	key_press(int keycode, t_cub_data *data)
 {
-	double	move_speed;
-	double	rotation_speed;
-
-	if (!data || !validate_data(data))
-		return (1);
-	move_speed = 0.3;
-	rotation_speed = 0.1;
-	if (keycode == KEY_ESC)
+	if (keycode == KEY_W)
+		data->keys.forward = true;
+	else if (keycode == KEY_S)
+		data->keys.back = true;
+	else if (keycode == KEY_A)
+		data->keys.left = true;
+	else if (keycode == KEY_D)
+		data->keys.right = true;
+	else if (keycode == KEY_LEFT)
+		data->keys.turn_left = true;
+	else if (keycode == KEY_RIGHT)
+		data->keys.turn_right = true;
+	else if (keycode == KEY_ESC)
 		exit_game(data);
-	handle_movement_keys(keycode, data, move_speed);
-	handle_rotation_keys(keycode, data, rotation_speed);
-	update_display(data);
+	return (0);
+}
+
+int	key_release(int keycode, t_cub_data *data)
+{
+	if (keycode == KEY_W)
+		data->keys.forward = false;
+	else if (keycode == KEY_S)
+		data->keys.back = false;
+	else if (keycode == KEY_A)
+		data->keys.left = false;
+	else if (keycode == KEY_D)
+		data->keys.right = false;
+	else if (keycode == KEY_LEFT)
+		data->keys.turn_left = false;
+	else if (keycode == KEY_RIGHT)
+		data->keys.turn_right = false;
 	return (0);
 }
 

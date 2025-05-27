@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:56:07 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 22:05:55 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/27 14:56:49 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,9 @@ static t_cub_data	*allocate_data(void)
 {
 	t_cub_data	*data;
 
-	data = (t_cub_data *)malloc(sizeof(t_cub_data));
+	data = (t_cub_data *)ft_calloc(1, sizeof(t_cub_data));
 	if (!data)
 		return (NULL);
-	ft_memset(data, 0, sizeof(t_cub_data));
-	data->player = NULL;
-	data->scene = NULL;
-	data->mlx = NULL;
-	data->win = NULL;
 	return (data);
 }
 
@@ -41,19 +36,10 @@ static int	init_player_and_map(t_cub_data *data, t_map *map)
 
 static int	init_textures_and_colors(t_cub_data *data, t_map *map)
 {
-	t_rgb	floor_color;
-	t_rgb	ceil_color;
-
 	if (!map->floor || !map->ceil)
 		return (0);
-	floor_color = parse_color_string(map->floor);
-	data->floor.red = floor_color.red;
-	data->floor.green = floor_color.green;
-	data->floor.blue = floor_color.blue;
-	ceil_color = parse_color_string(map->ceil);
-	data->ceil.red = ceil_color.red;
-	data->ceil.green = ceil_color.green;
-	data->ceil.blue = ceil_color.blue;
+	data->floor = parse_color_string(map->floor);
+	data->ceil = parse_color_string(map->ceil);
 	return (1);
 }
 
@@ -68,21 +54,13 @@ t_cub_data	*data_init(t_map *map)
 	t_cub_data	*data;
 
 	data = allocate_data();
-	if (!data)
-		return (NULL);
-	if (!init_player_and_map(data, map))
-	{
-		cleanup_partial_data(data);
-		return (NULL);
-	}
-	if (!init_textures_and_colors(data, map))
+	if (!data
+		|| !init_player_and_map(data, map)
+		|| !init_textures_and_colors(data, map)
+		|| !init_rendering(data, map))
 	{
 		cleanup_partial_data(data);
 		exit_error("Missing floor or ceiling color");
-	}
-	if (!init_rendering(data, map))
-	{
-		cleanup_partial_data(data);
 		return (NULL);
 	}
 	return (data);

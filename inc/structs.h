@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:31:11 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 23:05:55 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/27 14:16:49 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ typedef struct s_rgb
 	int	blue;
 }				t_rgb;
 
+typedef struct s_keys
+{
+	bool	forward;
+	bool	back;
+	bool	left;
+	bool	right;
+	bool	turn_left;
+	bool	turn_right;
+}				t_keys;
+
 typedef struct s_cub_data
 {
 	void			*mlx;
@@ -58,6 +68,7 @@ typedef struct s_cub_data
 	int				rows;
 	t_player		*player;
 	struct s_scene	*scene;
+	t_keys			keys;
 }				t_cub_data;
 
 typedef struct s_img

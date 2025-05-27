@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/20 11:52:20 by suroh            ###   ########.fr       */
+/*   Updated: 2025/05/27 14:13:19 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	main(int argc, char **argv)
 	mlx_hook(data->scene->draw->mlx_window,
 		KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->scene->draw->mlx_window,
-		33, 1L << 17, close_window, data);
+		KeyRelease, KeyReleaseMask, key_release, data);
+	mlx_hook(data->scene->draw->mlx_window, ClientMessage, NoEventMask,
+		close_window, data);
+	mlx_loop_hook(data->scene->draw->mlx_connection, loop_hook, data);
 	mlx_loop(data->scene->draw->mlx_connection);
 	return (0);
 }
