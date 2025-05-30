@@ -72,6 +72,7 @@ void	render_column(t_cub_data *data, t_scene *scene, int x)
 	t_map_pos		map_pos;
 	t_projection	proj;
 	t_texture		*tex;
+	int				true_draw_start;
 
 	ray.screen_x = x;
 	calculate_ray(scene, x, &ray);
@@ -88,9 +89,8 @@ void	render_column(t_cub_data *data, t_scene *scene, int x)
 	tex = choose_texture(scene, &ray);
 	ray.tex_x = calculate_tex_x(scene, proj.perp_dist, &ray, tex);
 	ray.tex_step = 1.0 * tex->height / (double)proj.line_height;
-	int true_draw_start = -proj.line_height / 2 + WINDOW_HEIGHT / 2;
-	int clipped_draw_start = ray.draw_start;
-	ray.tex_pos = (clipped_draw_start - true_draw_start) * ray.tex_step;
+	true_draw_start = -proj.line_height / 2 + WINDOW_HEIGHT / 2;
+	ray.tex_pos = (ray.draw_start - true_draw_start) * ray.tex_step;
 	draw_column(scene, tex, &ray);
 }
 
