@@ -70,9 +70,9 @@ int	calculate_tex_x(t_scene *scene, double perp_dist, t_ray *ray,
 		wall_x = scene->player->pos_x + perp_dist * ray->ray_dir_x;
 	wall_x = wall_x - floor(wall_x);
 	tex_x = (int)(wall_x * (double)tex->width);
-	if (ray->side == 0 && ray->ray_dir_x > 0.0)
+	if (ray->side == 0 && ray->ray_dir_x < 0.0)
 		tex_x = tex->width - tex_x - 1;
-	if (ray->side == 1 && ray->ray_dir_y < 0.0)
+	if (ray->side == 1 && ray->ray_dir_y > 0.0)
 		tex_x = tex->width - tex_x - 1;
 	return (tex_x);
 }
