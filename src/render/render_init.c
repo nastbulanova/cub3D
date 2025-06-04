@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:55:27 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/20 11:02:28 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 13:09:32 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,16 @@ t_draw	*draw_init(t_map *map)
 	if (!draw)
 		return (NULL);
 	draw->mlx_connection = mlx_init();
+	if (!draw->mlx_connection)
+		return (free(draw), NULL);
 	draw->mlx_window = mlx_new_window
 		(draw->mlx_connection, width, height, "cub3D");
+	if (!draw->mlx_window)
+		return (free(draw), NULL);
 	if (!init_image(draw, width, height))
 	{
-		free(draw);
-		return (NULL);
+		mlx_destroy_window(draw->mlx_connection, draw->mlx_window);
+		return (free(draw), NULL);
 	}
 	return (draw);
 }
@@ -89,5 +93,7 @@ t_scene	*render_init(t_cub_data *data, t_map *map)
 		free(scene);
 		return (NULL);
 	}
+	data->mlx = scene->draw->mlx_connection;
+	data->win = scene->draw->mlx_window;
 	return (scene);
 }

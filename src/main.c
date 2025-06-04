@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/27 14:13:19 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 11:17:12 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	handle_keypress(int keysym, void *param)
 {
-	(void)param;
+	t_cub_data	*data;
+
+	data = (t_cub_data *)param;
 	if (keysym == XK_Escape)
-		exit(0);
+		return (exit_game(data));
 	return (0);
 }
 
@@ -60,7 +62,7 @@ int	main(int argc, char **argv)
 		KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->scene->draw->mlx_window,
 		KeyRelease, KeyReleaseMask, key_release, data);
-	mlx_hook(data->scene->draw->mlx_window, ClientMessage, NoEventMask,
+	mlx_hook(data->scene->draw->mlx_window, 17, 0,
 		close_window, data);
 	mlx_loop_hook(data->scene->draw->mlx_connection, loop_hook, data);
 	mlx_loop(data->scene->draw->mlx_connection);

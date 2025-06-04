@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:05:56 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 22:51:54 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 13:11:43 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ int	setup_draw_and_textures(t_scene *scene, t_map *map)
 	scene->texs = load_textures(scene->draw, map);
 	if (!scene->texs)
 	{
+		if (scene->draw->img && scene->draw->img->img_ptr)
+			mlx_destroy_image
+				(scene->draw->mlx_connection, scene->draw->mlx_window);
+		if (scene->draw->mlx_window)
+			mlx_destroy_window
+				(scene->draw->mlx_connection, scene->draw->mlx_window);
 		free(scene->draw->img);
 		free(scene->draw);
 		return (0);

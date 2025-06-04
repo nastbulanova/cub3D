@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:33:54 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/27 15:06:53 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 10:46:01 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	loop_hook(t_cub_data *data)
 	float	mv;
 	float	rt;
 
-	mv = 0.005;
-	rt = 0.002;
+	mv = MVSPEED;
+	rt = RTSPEED;
 	m1 = handle_movement(data, mv);
 	m2 = handle_rotation(data, rt);
 	moved = (m1 || m2);

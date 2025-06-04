@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:40:03 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/27 14:56:02 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 11:51:45 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int	exit_game(t_cub_data *data)
 {
+	printf("EXIT_GAME\n");
 	if (!data)
 		return (0);
 	if (data->mlx && data->win)
+	{
+		printf("exit_game: destroying window\n");
 		mlx_destroy_window(data->mlx, data->win);
+	}
 	free_scene(data->mlx, data->scene);
 	free(data);
 	exit(0);
@@ -39,7 +43,7 @@ int	key_press(int keycode, t_cub_data *data)
 	else if (keycode == KEY_RIGHT)
 		data->keys.turn_right = true;
 	else if (keycode == KEY_ESC)
-		exit_game(data);
+		return(exit_game(data));
 	return (0);
 }
 
@@ -62,6 +66,5 @@ int	key_release(int keycode, t_cub_data *data)
 
 int	close_window(t_cub_data *data)
 {
-	exit_game(data);
-	return (0);
+	return (exit_game(data));
 }

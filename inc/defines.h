@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:43:27 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 22:48:44 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 10:47:30 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
+# define MVSPEED 0.005
+# define RTSPEED 0.002
 # define FOV 60
 # define PI_CONST 3.14159265358979323846
 # define KEY_ESC 65307

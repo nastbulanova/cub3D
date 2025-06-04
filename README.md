@@ -383,3 +383,15 @@
   - `KEY_W` → `move_forward_backward(data, player,  MOVE_SPEED)
 
 ---
+
+All of the “definitely lost” bytes are now gone, and that is the only thing your school will flag. The remaining “still reachable” allocations come entirely from X11/MLX’s internal bookkeeping (XOpenDisplay, Xkb, XCB, etc.) and cannot be freed by your code. In other words:
+
+Definitively lost: 0 bytes – ✔ good
+
+Indirectly lost: 0 bytes – ✔ good
+
+Still reachable: 86 221 bytes in 99 blocks (all from X11/MinilibX) – these are not your application’s leaks.
+
+Because MinilibX never gives you a portable “close display” call, X11 allocates some structures that remain “reachable” until the process exits. As far as your project is concerned, you only need to eliminate “definitely lost” and “indirectly lost.” Leaving “still reachable” from X11 is normal and expected.
+
+So there is nothing left for you to “fix.” Your Valgrind summary is clean.
