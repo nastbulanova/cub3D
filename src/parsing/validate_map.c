@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 22:06:44 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 17:56:26 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:06:07 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void	check_cell_enclosed(t_map *map, int y, int x)
 {
 	if (y == 0 || y == map->rows - 1
 		|| x == 0 || x == map->cols - 1)
-		exit_error("Map not enclosed by walls");
+		exit_error(map, "Map not enclosed by walls");
 	if (map->map[y - 1][x] == ' ' || map->map[y + 1][x] == ' '
 		|| map->map[y][x - 1] == ' ' || map->map[y][x + 1] == ' ')
-		exit_error("Map not enclosed by walls");
+		exit_error(map, "Map not enclosed by walls");
 }
 
 static void	check_map_enclosure(t_map *map)
@@ -85,8 +85,9 @@ static void	check_map_enclosure(t_map *map)
 void	validate_map(t_map *map)
 {
 	if (!map || !map->map)
-		exit_error("Map not properly initialized");
+		exit_error(map, "Map not properly initialized");
+	check_char(map);
 	if (count_player_starts(map) != 1)
-		exit_error("There must be exactly one player start");
+		exit_error(map, "There must be exactly one player start");
 	check_map_enclosure(map);
 }

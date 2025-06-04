@@ -6,22 +6,24 @@
 /*   By: suroh <suroh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:03:09 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 20:57:28 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 14:46:17 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*get_after_line(char *line)
+static char	*g_line = NULL;
+
+static char	*get_after_line(char *g_line)
 {
 	char	*after_line;
 	char	*temp;
 	int		len;
 
-	after_line = ft_strchr(line, '\n');
+	after_line = ft_strchr(g_line, '\n');
 	if (!after_line)
 	{
-		free(line);
+		free(g_line);
 		return (NULL);
 	}
 	len = ft_strlen(after_line);
@@ -31,31 +33,33 @@ static char	*get_after_line(char *line)
 	ft_strlcpy(temp, after_line + 1, len);
 	if (temp[0] == '\0')
 	{
-		free(line);
+		free(g_line);
 		free(temp);
 		return (NULL);
 	}
-	free(line);
+	free(g_line);
 	return (temp);
 }
 
-static char	*print_current_line(char *line)
+static char	*print_current_line(char *g_line)
 {
 	int		i;
 	char	*print_line;
 
 	i = 0;
-	while (line[i] != '\0')
+	while (g_line[i] != '\0')
 	{
-		if (line[i++] == '\n')
+		if (g_line[i++] == '\n')
 			break ;
 	}
 	print_line = (char *)malloc(i + 1);
-	ft_strlcpy(print_line, line, i + 1);
+	if (!print_line)
+		return (NULL);
+	ft_strlcpy(print_line, g_line, i + 1);
 	return (print_line);
 }
 
-static char	*get_current_line(char *line, int fd)
+static char	*get_current_line(char *g_line, int fd)
 {
 	ssize_t	read_check;
 	char	*buff;
@@ -64,36 +68,44 @@ static char	*get_current_line(char *line, int fd)
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
-	while (!line || !ft_strchr(line, '\n'))
+	while (!g_line || !ft_strchr(g_line, '\n'))
 	{
 		read_check = read(fd, buff, BUFFER_SIZE);
 		if (read_check <= 0)
 			break ;
 		buff[read_check] = '\0';
-		if (!line)
-			line = ft_strdup(buff);
+		if (!g_line)
+			g_line = ft_strdup(buff);
 		else
 		{
-			temp = ft_strjoin(line, buff);
-			free(line);
-			line = temp;
+			temp = ft_strjoin(g_line, buff);
+			free(g_line);
+			g_line = temp;
 		}
 	}
 	free(buff);
-	return (line);
+	return (g_line);
+}
+
+void	g_nl_cleanup(void)
+{
+	if (g_line)
+	{
+		free(g_line);
+		g_line = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
 	char		*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = get_current_line(line, fd);
-	if (!line)
+	g_line = get_current_line(g_line, fd);
+	if (!g_line)
 		return (NULL);
-	next_line = print_current_line(line);
-	line = get_after_line(line);
+	next_line = print_current_line(g_line);
+	g_line = get_after_line(g_line);
 	return (next_line);
 }

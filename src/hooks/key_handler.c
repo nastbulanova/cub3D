@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:40:03 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/04 11:51:45 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 13:20:33 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_press(int keycode, t_cub_data *data)
 	else if (keycode == KEY_RIGHT)
 		data->keys.turn_right = true;
 	else if (keycode == KEY_ESC)
-		return(exit_game(data));
+		return (exit_game(data));
 	return (0);
 }
 

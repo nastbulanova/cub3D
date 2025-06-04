@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:11:42 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 18:21:57 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:03:30 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
 
 void	parse_color_line(char **target, char *line)
 {
-	int	i;
+	int		i;
+	t_map	*map;
 
+	(void)map;
 	i = 1;
 	while (line[i] == ' ')
 		i++;
 	*target = ft_strdup(line + i);
 	if (!*target)
-		exit_error("malloc failed");
+		exit_error(NULL, "malloc failed");
 }
 
 void	add_map_line(t_map *map, char *line, char ***grid, int *rows)
@@ -34,7 +36,7 @@ void	add_map_line(t_map *map, char *line, char ***grid, int *rows)
 	(void)*map;
 	tmp = realloc_list(*grid, *rows + 1);
 	if (!tmp)
-		exit_error("Memory error");
+		exit_error(NULL, "Memory error");
 	*grid = tmp;
 	(*grid)[*rows] = ft_strdup(line);
 	(*rows)++;
@@ -57,7 +59,8 @@ void	process_line(t_map *map, char *line, char ***grid, int *rows)
 	else
 	{
 		printf("Invalid line: '%s'\n", line);
-		exit_error("Invalid line in .cub");
+		free(line);
+		exit_error(map, NULL);
 	}
 }
 

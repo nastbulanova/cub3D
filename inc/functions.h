@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:32:25 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/27 14:40:13 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 20:08:50 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,10 @@ char			**finalize_grid(char **raw, int rows, int *out_cols);
 
 //validate_map
 void			validate_map(t_map *map);
+void			check_char(t_map *map);
 
 //helpers
-void			exit_error(char *msg);
+void			exit_error(t_map *map, char *msg);
 void			ft_free_split(char **arr);
 char			**realloc_list(char **list, int new_count);
 void			cleanup_partial_data(t_cub_data *data);

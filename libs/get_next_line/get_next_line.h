@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:54:08 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/18 22:55:25 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 14:24:54 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 
 char		*get_next_line(int fd);
+void		g_nl_cleanup(void);
 size_t		ft_strlen(const char *str);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_strdup(const char *s);

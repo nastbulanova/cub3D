@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:56:07 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/04 13:09:10 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 14:01:00 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_cub_data	*data_init(t_map *map)
 		|| !init_rendering(data, map))
 	{
 		cleanup_partial_data(data);
-		exit_error("Missing floor or ceiling color");
+		exit_error(map, "Missing floor or ceiling color");
 		return (NULL);
 	}
 	return (data);

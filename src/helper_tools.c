@@ -6,23 +6,27 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:43:30 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/19 22:15:35 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 19:48:47 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/functions.h"
 #include "../libs/libft/libft.h"
+#include "../libs/get_next_line/get_next_line.h"
 
-void	exit_error(char *msg)
+void	exit_error(t_map *map, char *msg)
 {
-	ssize_t	ignored;
-
-	ignored = write(2, "Error\n", 6);
-	(void)ignored;
-	ignored = write(2, msg, ft_strlen(msg));
-	(void)ignored;
-	ignored = write(2, "\n", 1);
-	(void)ignored;
+	if (map)
+		free_map_data(map);
+	g_nl_cleanup();
+	if (msg)
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		ft_putstr_fd((char *)msg, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
+	else
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 

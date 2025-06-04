@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:27:55 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/17 22:12:44 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 14:04:25 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ static char	**alloc_grid(int rows, int cols)
 {
 	char	**grid;
 	int		i;
+	t_map	*map;
 
+	(void)map;
 	grid = malloc(sizeof(*grid) * rows);
 	if (!grid)
-		exit_error("malloc failed");
+		exit_error(NULL, "malloc failed");
 	i = 0;
 	while (i < rows)
 	{
 		grid[i] = malloc(cols + 1);
 		if (!grid[i])
-			exit_error("malloc failed");
+			exit_error(NULL, "malloc failed");
 		i++;
 	}
 	return (grid);

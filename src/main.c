@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/04 11:17:12 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/04 19:48:24 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_map	*parse_map(char *file_path)
 
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		exit_error("Cannot open map file");
+		exit_error(NULL, "Cannot open map file");
 	map = init_map_struct();
 	grid = NULL;
 	rows = 0;
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 	t_cub_data	*data;
 
 	if (argc != 2)
-		exit_error("Usage: ./cub3D <map.cub>");
+		exit_error(NULL, "Usage: ./cub3D <map.cub>");
 	map = parse_map(argv[1]);
 	data = data_init(map);
 	render_scene(data, data->scene);
