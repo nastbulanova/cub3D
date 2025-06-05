@@ -6,7 +6,7 @@
 /*   By: suroh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:20:08 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/05 13:30:32 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 20:25:19 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,28 @@ static char	**get_color_parts(char *colors, char *line, t_map *map)
 	parts = ft_split(colors, ',');
 	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3] != NULL)
 	{
+		ft_free_split(parts);
 		free(line);
+		close(map->fd_cub);
 		exit_error(map, "Invalid color format");
 	}
 	return (parts);
+}
+
+static int	is_num(const char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s || s[0] == '\0')
+		return (0);
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 static char	*check_color_value_and_dup(char *colors, char **parts, char *line,
@@ -68,6 +86,13 @@ void	parse_color_line(t_map *map, char **target, char *line)
 		i++;
 	colors = line + i;
 	parts = get_color_parts(colors, line, map);
+	if (!is_num(parts[0]) || !is_num(parts[1]) || !is_num(parts[2]))
+	{
+		ft_free_split(parts);
+		free(line);
+		close(map->fd_cub);
+		exit_error(map, "Invalid character in color");
+	}
 	dup = check_color_value_and_dup(colors, parts, line, map);
 	*target = dup;
 }

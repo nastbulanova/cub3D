@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:31:11 by suroh             #+#    #+#             */
-/*   Updated: 2025/05/27 14:16:49 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 20:11:11 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_map
 	int		rows;
 	int		res_w;
 	int		res_h;
+	int		fd_cub;
 }			t_map;
 
 typedef struct s_player

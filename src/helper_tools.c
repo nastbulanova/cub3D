@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:43:30 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/04 19:48:47 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 20:15:43 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 
 void	exit_error(t_map *map, char *msg)
 {
+	if (map && map->fd_cub >= 0)
+	{
+		close(map->fd_cub);
+		map->fd_cub = -1;
+	}
 	if (map)
 		free_map_data(map);
 	g_nl_cleanup();

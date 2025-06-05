@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 22:06:44 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/05 12:41:10 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 19:59:02 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ void	validate_map(t_map *map)
 {
 	if (!map || !map->map)
 		exit_error(map, "Map not properly initialized");
+	validate_texture_path(map, map->file_no);
+	validate_texture_path(map, map->file_so);
+	validate_texture_path(map, map->file_we);
+	validate_texture_path(map, map->file_ea);
 	check_char(map);
 	if (count_player_starts(map) != 1)
 		exit_error(map, "There must be exactly one player start");

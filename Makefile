@@ -16,6 +16,7 @@ SRCS = \
 	src/parsing/parsing_utils_3.c \
     src/parsing/finalize_grid.c \
     src/parsing/validate_map.c \
+	src/parsing/validate_map_utils.c \
     src/parsing/check_char.c \
 	src/parsing/parse_color_line.c \
 	src/player/player_init.c \

@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:54:12 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/05 15:22:52 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 20:11:40 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_map	*parse_map(char *file_path)
 	if (fd < 0)
 		exit_error(NULL, "Cannot open map file");
 	map = init_map_struct();
+	map->fd_cub = fd;
 	grid = NULL;
 	rows = 0;
 	read_map_lines(fd, map);

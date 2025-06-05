@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:12:43 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/05 15:48:45 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 20:17:29 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,16 @@ void	free_map_data(t_map *map)
 static void	free_single_texture(void *mlx, t_texture *tex)
 {
 	if (!tex)
-	{
-		printf("free_single_texture: tex == NULL\n");
 		return ;
-	}
 	if (mlx && tex->img_ptr)
-	{
-		printf("free_single_texture: destroying one texture\n");
 		mlx_destroy_image(mlx, tex->img_ptr);
-	}
 	free(tex);
 }
 
 void	free_textures(void *mlx, t_textures *textures)
 {
 	if (!textures)
-	{
-		printf("free_textures: textures == NULL\n");
 		return ;
-	}
 	free_single_texture(mlx, textures->north);
 	free_single_texture(mlx, textures->south);
 	free_single_texture(mlx, textures->east);
@@ -70,18 +61,15 @@ void	free_drawing_resources(void *mlx, t_draw *draw)
 {
 	if (!draw)
 	{
-		printf("free_drawing_resources: draw == NULL\n");
 		return ;
 	}
 	if (draw->img)
 	{
-		printf("free_drawing_resources: destroying off-screen image\n");
 		if (mlx && draw->img && draw->img->img_ptr)
 			mlx_destroy_image(mlx, draw->img->img_ptr);
 		free(draw->img);
 	}
 	mlx_destroy_display(draw->mlx_connection);
-	printf("destroy_mlx_display\n");
 	free(draw->mlx_connection);
 	free(draw);
 }
@@ -89,17 +77,10 @@ void	free_drawing_resources(void *mlx, t_draw *draw)
 void	free_scene(void *mlx, t_scene *scene)
 {
 	if (!scene)
-	{
-		printf("free_scene: scene == NULL\n");
 		return ;
-	}
-	printf("free_scene: freeing map\n");
 	free_map_data(scene->map);
-	printf("free_scene: freeing textures\n");
 	free_textures(mlx, scene->texs);
-	printf("free_scene: freeing drawing resources\n");
 	free_drawing_resources(mlx, scene->draw);
-	printf("free_scene: freeing player and scene\n");
 	free(scene->player);
 	free(scene);
 }

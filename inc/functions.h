@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:32:25 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/05 13:42:36 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 19:59:36 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char			**finalize_grid(char **raw, int rows, int *out_cols);
 
 //validate_map
 void			validate_map(t_map *map);
+void			validate_texture_path(t_map *map, char *path);
 void			check_char(t_map *map);
 
 //helpers
