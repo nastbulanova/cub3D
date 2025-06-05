@@ -6,7 +6,7 @@
 /*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:32:25 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/04 20:08:50 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 13:42:36 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ bool			is_map_line(char *line);
 bool			is_blank_line(char *line);
 char			*strip_line(const char *line);
 void			parse_texture_line(t_map *map, char *line);
-void			parse_color_line(char **target, char *line);
+void			parse_color_line(t_map *map, char **target, char *line);
 void			add_map_line(t_map *map, char *line, char ***grid, int *rows);
 void			process_line(t_map *map, char *line, char ***grid, int *rows);
 void			read_map_lines(int fd, t_map *map);

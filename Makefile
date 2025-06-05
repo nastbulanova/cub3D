@@ -17,6 +17,7 @@ SRCS = \
     src/parsing/finalize_grid.c \
     src/parsing/validate_map.c \
     src/parsing/check_char.c \
+	src/parsing/parse_color_line.c \
 	src/player/player_init.c \
 	src/player/player_movement.c \
 	src/hooks/exit_game_helpers.c \
