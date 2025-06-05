@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suroh <suroh@student.42lisboa.com>         +#+  +:+       +#+        */
+/*   By: suroh <suroh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:12:43 by suroh             #+#    #+#             */
-/*   Updated: 2025/06/04 11:51:26 by suroh            ###   ########.fr       */
+/*   Updated: 2025/06/05 15:48:45 by suroh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ void	free_drawing_resources(void *mlx, t_draw *draw)
 			mlx_destroy_image(mlx, draw->img->img_ptr);
 		free(draw->img);
 	}
+	mlx_destroy_display(draw->mlx_connection);
+	printf("destroy_mlx_display\n");
+	free(draw->mlx_connection);
 	free(draw);
 }
 
